@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <button class="btn btn-primary" onclick="getCars()">GetJsonCars</button>
+    <div id="carsJsonData"></div>
+</div>
+<script>
+    function getCars() {
+        $.get("@Url.Action("CarDetailsJson", "Cars")", function (data) {
+          $('#carsJsonData').append(JSON.stringify(data));
+        });
+    }
+</script>

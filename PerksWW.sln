@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29814.53
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerksWW", "PerksWW\PerksWW.csproj", "{635F4660-D248-40D3-B8E3-AA5D0388DA11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerksWW.Domain", "PerksWW.Domain\PerksWW.Domain.csproj", "{798BF6EF-5A61-4844-9E97-98E834AE540C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{635F4660-D248-40D3-B8E3-AA5D0388DA11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{635F4660-D248-40D3-B8E3-AA5D0388DA11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{635F4660-D248-40D3-B8E3-AA5D0388DA11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{635F4660-D248-40D3-B8E3-AA5D0388DA11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{798BF6EF-5A61-4844-9E97-98E834AE540C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{798BF6EF-5A61-4844-9E97-98E834AE540C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{798BF6EF-5A61-4844-9E97-98E834AE540C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{798BF6EF-5A61-4844-9E97-98E834AE540C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0C21554-52E5-4E77-9B8F-BF16577E90EF}
+	EndGlobalSection
+EndGlobal
