@@ -18,46 +18,24 @@ namespace PerksWW.Domain.DataAccess
             _context = context;
         }
 
-        public void DeleteCar(int? carId)
+        Task ICarAccessLayer.DeleteCar(int? carId)
         {
-            try
+            return Task.Run(() =>
             {
-                Car car = _context.Cars.Find(carId);
-                car.IsDeleted = true;
-                _context.Entry(car).State = EntityState.Modified;
-                _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+                try
+                {
+                    Car car = _context.Cars.Find(carId);
+                    car.IsDeleted = true;
+                    _context.Entry(car).State = EntityState.Modified;
+                    _context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            });
         }
 
-
-        public IEnumerable<Car> GetAllCars()
-        {
-            try
-            {
-                return _context.Cars.Where(x => x.IsDeleted == false).ToList();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-        public void UpdateCar(Car car)
-        {
-            try
-            {
-                _context.Entry(car).State = EntityState.Modified;
-                _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
 
         Task ICarAccessLayer.AddCar(Car car)
         {
@@ -84,6 +62,36 @@ namespace PerksWW.Domain.DataAccess
             });
         }
 
+        Task<IEnumerable<Car>> ICarAccessLayer.GetAllCars()
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    return _context.Cars.Where(x => x.IsDeleted == false).AsEnumerable();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
 
+            });
+        }
+
+        Task ICarAccessLayer.UpdateCar(Car car)
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    _context.Entry(car).State = EntityState.Modified;
+                    _context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            });
+        }
     }
 }

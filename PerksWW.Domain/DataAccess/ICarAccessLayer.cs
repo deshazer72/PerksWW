@@ -8,14 +8,14 @@ namespace PerksWW.Domain.DataAccess
 {
     public interface ICarAccessLayer
     {
-        IEnumerable<Car> GetAllCars();
+        Task<IEnumerable<Car>> GetAllCars();
 
         Task AddCar(Car car);
 
-        void UpdateCar(Car car);
+        Task UpdateCar(Car car);
 
         Task<Car> GetCar(int? carId);
 
-        void DeleteCar(int? carId);
+        Task DeleteCar(int? carId);
     }
 }

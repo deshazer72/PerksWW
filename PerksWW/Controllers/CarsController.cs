@@ -20,9 +20,9 @@ namespace PerksWW.Controllers
         }
 
         // GET: Cars
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_carAccess.GetAllCars());
+            return View(await _carAccess.GetAllCars());
         }
 
         // GET: Cars/Details/5
@@ -84,7 +84,7 @@ namespace PerksWW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("CarId,Make,Model,IsDeleted,Type")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("CarId,Make,Model,IsDeleted,Type")] Car car)
         {
             if (id != car.CarId)
             {
@@ -95,7 +95,7 @@ namespace PerksWW.Controllers
             {
                 try
                 {
-                    _carAccess.UpdateCar(car);
+                   await _carAccess.UpdateCar(car);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -114,14 +114,14 @@ namespace PerksWW.Controllers
         }
 
         // GET: Cars/Delete/5
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            _carAccess.DeleteCar(id);
+           await _carAccess.DeleteCar(id);
 
 
             return RedirectToAction(nameof(Index));
@@ -130,9 +130,9 @@ namespace PerksWW.Controllers
         // POST: Cars/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            _carAccess.DeleteCar(id);
+           await _carAccess.DeleteCar(id);
             return RedirectToAction(nameof(Index));
         }
 
@@ -150,9 +150,9 @@ namespace PerksWW.Controllers
         }
 
         [HttpGet]
-        public JsonResult CarDetailsJson()
+        public async Task<JsonResult> CarDetailsJson()
         {
-            var cars = _carAccess.GetAllCars();
+            var cars =  await _carAccess.GetAllCars();
             return Json(cars);
         }
     }
