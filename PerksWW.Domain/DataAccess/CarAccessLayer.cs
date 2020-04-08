@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace PerksWW.Domain.DataAccess
 {
@@ -16,20 +17,8 @@ namespace PerksWW.Domain.DataAccess
         {
             _context = context;
         }
-        public void AddCar(Car car)
-        {
-            try
-            {
-                _context.Cars.Add(car);
-                _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
 
-        public void DeleteCar(int carId)
+        public void DeleteCar(int? carId)
         {
             try
             {
@@ -44,24 +33,12 @@ namespace PerksWW.Domain.DataAccess
             }
         }
 
+
         public IEnumerable<Car> GetAllCars()
         {
             try
             {
                 return _context.Cars.Where(x => x.IsDeleted == false).ToList();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-        public Car GetCar(int? carId)
-        {
-            try
-            {
-                Car car = _context.Cars.Find(carId);
-                return car;
             }
             catch (Exception e)
             {
@@ -81,5 +58,32 @@ namespace PerksWW.Domain.DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        Task ICarAccessLayer.AddCar(Car car)
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    _context.Cars.Add(car);
+                    _context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            });
+        }
+
+        Task<Car> ICarAccessLayer.GetCar(int? carId)
+        {
+            return Task.Run(() =>
+            {
+                var car = _context.Cars.Find(carId);
+                return car;
+            });
+        }
+
+
     }
 }

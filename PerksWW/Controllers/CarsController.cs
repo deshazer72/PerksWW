@@ -26,14 +26,14 @@ namespace PerksWW.Controllers
         }
 
         // GET: Cars/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var car = _carAccess.GetCar(id);
+            var car =  await _carAccess.GetCar(id);
             if (car == null)
             {
                 return NotFound();
@@ -53,25 +53,25 @@ namespace PerksWW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("CarId,Make,Model,IsDeleted,Type")] Car car)
+        public async Task<IActionResult> Create([Bind("CarId,Make,Model,IsDeleted,Type")] Car car)
         {
             if (ModelState.IsValid)
             {
-                _carAccess.AddCar(car);
+               await _carAccess.AddCar(car);
                 return RedirectToAction(nameof(Index));
             }
             return View(car);
         }
 
         // GET: Cars/Edit/5
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var car = _carAccess.GetCar(id);
+            var car =  await _carAccess.GetCar(id);
             if (car == null)
             {
                 return NotFound();
@@ -121,13 +121,10 @@ namespace PerksWW.Controllers
                 return NotFound();
             }
 
-            var car = _carAccess.GetCar(id);
-            if (car == null)
-            {
-                return NotFound();
-            }
+            _carAccess.DeleteCar(id);
 
-            return View(car);
+
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Cars/Delete/5
@@ -141,7 +138,7 @@ namespace PerksWW.Controllers
 
         private bool CarExists(int id)
         {
-            Car car = _carAccess.GetCar(id);
+            Task<Car> car = _carAccess.GetCar(id);
             if (car != null)
             {
                 return true;

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PerksWW.Domain.DataAccess
 {
@@ -9,12 +10,12 @@ namespace PerksWW.Domain.DataAccess
     {
         IEnumerable<Car> GetAllCars();
 
-        void AddCar(Car car);
+        Task AddCar(Car car);
 
         void UpdateCar(Car car);
 
-        Car GetCar(int? carId);
+        Task<Car> GetCar(int? carId);
 
-        void DeleteCar(int carId);
+        void DeleteCar(int? carId);
     }
 }

@@ -12,7 +12,9 @@ namespace PerksWW.Domain.EFContext
         {
             context.Database.EnsureCreated();
 
+#pragma warning disable EF1001 // Internal EF Core API usage.
             if (context.Cars.Any())
+#pragma warning restore EF1001 // Internal EF Core API usage.
             {
                 return;
             }
